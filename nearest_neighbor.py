@@ -3,6 +3,9 @@ from sklearn import datasets
 from sklearn.cross_validation import train_test_split
 from sklearn.metrics import accuracy_score
 
+# A very basic Nearest Neigbour implementation which predicts
+# using shortest euclidean distance between test data and training
+# data
 class NearestNeighbor():
     def predict(self, test_data):
         predictions = []
@@ -26,6 +29,7 @@ class NearestNeighbor():
         return y_train[closest_neighbor_index]
 
 
+# Import and extract out training and testing data
 iris = datasets.load_iris()
 X = iris.data
 y = iris.target
@@ -33,8 +37,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.5)
 
 classifier = NearestNeighbor()
 classifier.fit(X_train, y_train)
+
+# Predictions
 predictions = classifier.predict(X_test)
 # print predictions
 
+# Accuracy
 print "Accuracy score for Basic Nearest Neighbor:"
 print accuracy_score(y_test, predictions)
